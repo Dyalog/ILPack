@@ -24,7 +24,15 @@ namespace Lokad.ILPack.Metadata
 
             // todo, also maybe in Module, ModuleRef, AssemblyRef and TypeRef
             // ECMA-335 page 273-274
-            return type.Assembly != SourceAssembly;
+            
+            //See: https://github.com/Lokad/ILPack/issues/175
+            //For the reasons for the change below
+            
+            //return type.Assembly != SourceAssembly;
+
+            string n1 = type.Assembly.FullName;
+            string n2 = SourceAssembly.FullName;
+            return n1 != n2;
         }
 
         private EntityHandle ResolveTypeReference(Type type)
